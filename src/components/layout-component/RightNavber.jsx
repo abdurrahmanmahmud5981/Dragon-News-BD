@@ -1,8 +1,11 @@
+import FindUs from "../FindUs";
+import SocialLogin from "../SocialLogin";
 
 const RightNavber = () => {
     return (
         <div>
-            right
+            <SocialLogin/>
+            <FindUs/>
         </div>
     );
 };
