@@ -3,7 +3,7 @@ import userIcon from "../assets/user.png";
 import { useContext } from "react";
 import { AuthContext } from "../provider/AuthProvider";
 const Navber = () => {
-  const { user,logOut } = useContext(AuthContext);
+  const { user, logOut } = useContext(AuthContext);
   return (
     <div className="flex justify-between items-center">
       <div className="">{user?.email} </div>
@@ -14,7 +14,14 @@ const Navber = () => {
       </div>
       <div className="login flex items-center gap-3">
         <div className="">
-          <img src={userIcon} alt="usericon" />
+          {user && user?.email ? (
+            <div className="">
+              <img className="w-8 rounded-full" src={user.photoURL} alt="usericon" />
+            <p>{user?.displayName}</p>
+            </div>
+          ) : (
+            <img src={userIcon} alt="usericon" />
+          )}
         </div>
         {user && user?.email ? (
           <button onClick={logOut} className="btn btn-neutral rounded-none ">
