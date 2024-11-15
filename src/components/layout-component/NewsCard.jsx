@@ -12,14 +12,14 @@ const NewsCard = (props = {}) => {
           {/* Author Info */}
           <div className="flex items-center gap-3">
             <img
-              src={news.author.img}
+              src={news?.author?.img}
               alt="Author"
               className="w-10 h-10 rounded-full"
             />
             <div>
-              <h3 className="text-sm font-semibold">{news.author.name}</h3>
+              <h3 className="text-sm font-semibold">{news?.author?.name}</h3>
               <p className="text-xs text-gray-500">
-                {news.author.published_date}
+                {news?.author?.published_date}
               </p>
             </div>
           </div>
@@ -29,12 +29,12 @@ const NewsCard = (props = {}) => {
         </div>
         <div className="card w-full bg-white  p-4 ">
           {/* Title */}
-          <h2 className="mt-4 text-xl font-bold">{news.title}</h2>
+          <h2 className="mt-4 text-xl font-bold">{news?.title}</h2>
 
           {/* Image */}
           <figure className="my-4">
             <img
-              src={news.image_url}
+              src={news?.image_url}
               alt="News"
               className=" object-cover w-full"
             />
@@ -53,21 +53,21 @@ const NewsCard = (props = {}) => {
             {/* Rating */}
             <div className="flex items-center gap-1">
               <div className="flex text-yellow-400">
-                {[...Array(5)].map((_, i) => (
+                {[...Array(5)]?.map((_, i) => (
                   <span key={i}>
-                    {i < Math.round(news.rating.number) ? "★" : "☆"}
+                    {i < Math.round(news?.rating?.number) ? "★" : "☆"}
                   </span>
                 ))}
               </div>
               <span className="text-sm font-semibold">
-                {news.rating.number}
+                {news?.rating?.number}
               </span>
             </div>
 
             {/* Views */}
             <div className="flex items-center gap-2 text-gray-500">
               <AiOutlineEye />
-              <span>{news.total_view}</span>
+              <span>{news?.total_view}</span>
             </div>
           </div>
         </div>

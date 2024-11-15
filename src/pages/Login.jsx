@@ -7,18 +7,16 @@ const Login = () => {
   const [error, setError] = useState({});
   const location = useLocation();
   const navigate = useNavigate();
-  console.log(location);
-  const hanleSubmit = (e) => {
-    e.preventDefault();
+  const hanleSubmit = (event) => {
+    event.preventDefault();
     // form data
-    const form = new FormData(e.target);
+    const form = new FormData(event.target);
     const email = form.get("email");
     const password = form.get("password");
-    console.log(email, password);
+
     loginUser(email, password)
       .then((result) => {
         const user = result.user;
-        console.log(user);
         setUser(user);
         navigate(location?.state ? location?.state : "/");
       })
@@ -57,10 +55,12 @@ const Login = () => {
               className="input input-bordered"
               required
             />
-            {error.login && (
+            {error?.login && (
               <label className="label">
-              <span className="error text-sm text-red-600">{error.login}</span>
-            </label>
+                <span className="error text-sm text-red-600">
+                  {error?.login}
+                </span>
+              </label>
             )}
             <label className="label">
               <a href="#" className="label-text-alt link link-hover">
@@ -73,7 +73,7 @@ const Login = () => {
           </div>
         </form>
         <p className="text-center font-semibold">
-          Don't have An Account ?{" "}
+          Don't have An Account ? 
           <Link className="underline text-red-500" to="/auth/register">
             Register Now
           </Link>

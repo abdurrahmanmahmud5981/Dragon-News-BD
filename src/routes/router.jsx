@@ -14,33 +14,41 @@ const router = createBrowserRouter([
     children: [
       {
         path: "",
-        element: <Navigate to="/category/01"></Navigate>
+        element: <Navigate to="/category/01"></Navigate>,
       },
       {
         path: "/category/:id",
-        element: <CategoryNews/>,
-        loader:({params})=>fetch(`https://openapi.programming-hero.com/api/news/category/${params.id}`)
-      }
+        element: <CategoryNews />,
+        loader: ({ params }) =>
+          fetch(
+            `https://openapi.programming-hero.com/api/news/category/${params?.id}`
+          ),
+      },
     ],
   },
   {
     path: "/news/:id",
-    element: <PrivateRoute><NewsDetails/></PrivateRoute>,
-    loader:({params})=> fetch(`https://openapi.programming-hero.com/api/news/${params.id}`)
+    element: (
+      <PrivateRoute>
+        <NewsDetails />
+      </PrivateRoute>
+    ),
+    loader: ({ params }) =>
+      fetch(`https://openapi.programming-hero.com/api/news/${params?.id}`),
   },
   {
     path: "/auth",
-    element: <AuthLayout/>,
-    children:[
+    element: <AuthLayout />,
+    children: [
       {
         path: "/auth/login",
-        element: <Login/>
+        element: <Login />,
       },
       {
         path: "/auth/register",
-        element: <Register/>
-      }
-    ]
+        element: <Register />,
+      },
+    ],
   },
   {
     path: "*",

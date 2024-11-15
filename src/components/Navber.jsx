@@ -16,7 +16,7 @@ const Navber = () => {
         <div className="">
           {user && user?.email ? (
             <div className="">
-              <img className="w-8 rounded-full" src={user.photoURL} alt="usericon" />
+              <img className="w-8 rounded-full" src={user?.photoURL} alt="usericon" />
             <p>{user?.displayName}</p>
             </div>
           ) : (

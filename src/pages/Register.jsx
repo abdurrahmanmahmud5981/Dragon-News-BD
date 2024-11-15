@@ -6,10 +6,10 @@ const Register = () => {
   const { createNewUser, setUser,updateUserProfile } = useContext(AuthContext);
   const navigate = useNavigate()
   const [error, setError] = useState({})
-  const hanleSubmit = (e) => {
-    e.preventDefault();
+  const hanleSubmit = (event) => {
+    event.preventDefault();
     // form data
-    const form = new FormData(e.target);
+    const form = new FormData(event.target);
     const name = form.get("name");
     if(name.length< 5){
       setError({...error, name: "Name should be at least 5 characters long" });
@@ -21,17 +21,14 @@ const Register = () => {
     const password = form.get("password");
    
     createNewUser(email, password).then((res) => {
-        const user = res.user;
-        console.log(user);
+        const user = res?.user;
         setUser(user);
         updateUserProfile({displayName: name, photoURL: photo})
         .then(()=>navigate("/"))
-        .catch(err => console.log(err))
+        .catch(err => setError({...error, register: err?.message }))
 
     }).catch((err) => {
-        const errorMessage = err.message
-        const errorCode = err.code;
-        console.log( errorMessage + errorCode);
+        const errorMessage = err?.message
         setError({...error, register: errorMessage });
     });
   };
@@ -55,8 +52,8 @@ const Register = () => {
             />
           </div>
           {
-            error.name && (
-              <p className="text-red-500 text-xs">{error.name}</p>
+            error?.name && (
+              <p className="text-red-500 text-xs">{error?.name}</p>
             )
           }
           {/* photo url */}

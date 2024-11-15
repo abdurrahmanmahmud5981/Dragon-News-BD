@@ -4,9 +4,7 @@ import RightNavber from "../components/layout-component/RightNavber";
 
 const NewsDetails = () => {
   const { data } = useLoaderData();
-  console.log(data[0]); // Access the fetched data here
   const news = data[0];
-  console.log(news);
   return (
     <div>
       <header>
