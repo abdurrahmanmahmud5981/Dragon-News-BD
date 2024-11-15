@@ -11,19 +11,23 @@ export const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
   console.log(user);
 // add new user   
  const createNewUser =(email,password)=>{
+    setLoading(true);
     return createUserWithEmailAndPassword(auth,email,password);
  }
 
  // login user
  const loginUser =(email,password)=>{
+   setLoading(true);
    return signInWithEmailAndPassword(auth,email,password);
  }
 
  // log out user
  const logOut = ()=>{
+  setLoading(true);  // set loading to true before logging out to prevent loading state when user is logged out.
   return signOut(auth);
  }
   const authInfo = {
@@ -32,11 +36,14 @@ const AuthProvider = ({ children }) => {
     createNewUser,
     logOut,
     loginUser,
+    loading,
+    setLoading,
   };
 
   useEffect(()=>{
     const unsubscribe = onAuthStateChanged(auth,(user) => {
       setUser(user);
+      setLoading(false);
     });
     return ()=>{
         unsubscribe()

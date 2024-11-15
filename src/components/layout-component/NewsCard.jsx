@@ -1,4 +1,5 @@
 import { AiOutlineEye, AiOutlineShareAlt } from "react-icons/ai";
+import { Link } from "react-router-dom";
 
 const NewsCard = (props = {}) => {
   const { news } = props || {};
@@ -43,9 +44,9 @@ const NewsCard = (props = {}) => {
           <p className="text-gray-700 text-sm mb-4">
             {news.details.slice(0, 150)}...
           </p>
-          <p className="text-red-500 text-sm font-semibold cursor-pointer">
+          <Link to={`/news/${news?._id}`} className="text-red-500 text-sm font-semibold cursor-pointer">
             Read More
-          </p>
+          </Link>
 
           {/* Footer with Rating and Views */}
           <div className="flex justify-between items-center mt-4">
