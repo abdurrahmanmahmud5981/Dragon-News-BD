@@ -1,16 +1,39 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../provider/AuthProvider";
 
 const Login = () => {
+  const {loginUser,setUser} = useContext(AuthContext)
+  const hanleSubmit = (e) => {
+    e.preventDefault();
+    // form data
+    const form = new FormData(e.target);
+    const email = form.get("email");
+    const password = form.get("password");
+    console.log(email, password);
+    loginUser(email, password)
+    .then((result) => {
+      const user = result.user;
+      console.log(user);
+      setUser(user);
+    })
+    .catch((error) => {
+     alert(error.message);
+    });
+    
+  }
+
   return (
     <div className="min-h-screen flex justify-center items-center">
       <div className="card bg-base-100 w-full max-w-lg shrink-0 rounded-none p-10">
         <h2 className="text-2xl font-semibold text-center">Login Your Accoutn</h2>
-        <form className="card-body">
+        <form onSubmit={hanleSubmit} className="card-body">
           <div className="form-control">
             <label className="label">
               <span className="label-text">Email</span>
             </label>
             <input
+            name="email"
               type="email"
               placeholder="email"
               className="input input-bordered"
@@ -22,6 +45,7 @@ const Login = () => {
               <span className="label-text">Password</span>
             </label>
             <input
+            name="password"
               type="password"
               placeholder="password"
               className="input input-bordered"
